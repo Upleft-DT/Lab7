@@ -35,4 +35,35 @@ router.setState = function() {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
+  if(arguments [0] == 1){
+    document.querySelector('body').classList.remove(arguments[1]);
+    document.querySelector('header').querySelector('h1').innerHTML = 'Journal Entries';
+    window.history.pushState({page: 1}, "home", " ");
+  }
+
+  if(arguments [0] == 2){
+    let x = arguments[1];
+    document.querySelector('body').className = 'single-entry';
+    let title = 'Entry ' + x.id;
+
+    document.querySelector('header').querySelector('h1').innerHTML = title;
+
+    let entryPageElement = document.querySelector('body').querySelector('entry-page');
+    entryPageElement.remove();
+    entryPageElement = document.createElement('entry-page');
+    entryPageElement.entry = x.entry;
+    document.querySelector('body').appendChild(entryPageElement);
+
+    const url = '#Entry' + x.id;
+    window.history.pushState({id: x.id}, "entry", url);
+  }
+
+  if(arguments [0] == 3){
+    document.querySelector('body').className = 'settings';
+    document.querySelector('header').querySelector('h1').innerHTML = 'Settings';
+
+    const url = '#Settings'
+    window.history.pushState({page: 3}, "setting", url);
+  }
+
 }
